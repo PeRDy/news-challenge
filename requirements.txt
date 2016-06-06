@@ -1,0 +1,22 @@
+##################
+# News Challenge #
+##################
+
+## System dependencies and utilities
+gunicorn>=19.3,<19.4
+
+## Django
+Django>=1.9,<1.10
+django-extensions>=1.5,<1.6
+psycopg2>=2.6,<2.7
+django-material>=0.7,<1.0
+
+## Cache and Redis
+django-redis>=4.3,<4.4
+
+## IPython
+ipython>=4.0,<4.1
+
+## Tests
+ipdb
+coverage==3.7.1
