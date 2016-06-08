@@ -29,8 +29,10 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     # News Challenge apps
     'news_challenge',
+    'news',
     # System utilities
     'gunicorn',
+    'django_extensions',
 )
 
 MIDDLEWARE_CLASSES = (

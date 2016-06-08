@@ -94,8 +94,7 @@ class Main(object):
         try:
             if input_command == 'build':
                 self.run_command('django_admin', 'migrate', '--fake-initial')
-                self.run_command('django_admin', 'collectstatic', '--noinput')
-                return_code = self.run_command('django_admin', 'createsuperuser')
+                return_code = self.run_command('django_admin', 'collectstatic', '--noinput')
             elif input_command in self.INPUT_COMMANDS:
                 return_code = self.run_command(input_command, *self.args.args)
             elif input_command is not None:

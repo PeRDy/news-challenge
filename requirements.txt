@@ -5,9 +5,13 @@
 ## System dependencies and utilities
 gunicorn>=19.3,<19.4
 
+## Data Analytics
+pandas>=0.18,<0.19
+django-pandas>=0.4,<0.5
+
 ## Django
 Django>=1.9,<1.10
-django-extensions>=1.5,<1.6
+django-extensions>=1.6,<1.7
 psycopg2>=2.6,<2.7
 django-material>=0.7,<1.0
 
