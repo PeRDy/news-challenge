@@ -1,0 +1,23 @@
+###########################
+##     News Challenge    ##
+##     Docker Compose    ##
+###########################
+version: '2'
+services:
+  news:
+    build: .
+    image: news_challenge
+    entrypoint: ["python", "run.py"]
+    links:
+      - postgres
+    ports:
+      - "8000:8000"
+    volumes:
+      - /usr/src/app:/usr/src/app
+
+  postgres:
+    image: postgres:9.4
+    environment:
+      POSTGRES_USER: news
+      POSTGRES_PASSWORD: n3ws
+      POSTGRES_DB: news_challenge

@@ -27,6 +27,8 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    # REST Framework
+    'rest_framework',
     # News Challenge apps
     'news_challenge',
     'news',
@@ -156,4 +158,12 @@ LOGGING = {
             'propagate': False,
         },
     },
+}
+
+#########################
+# Django Rest Framework
+#########################
+REST_FRAMEWORK = {
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
+    'DEFAULT_VERSIONING_CLASS': 'rest_framework.versioning.NamespaceVersioning',
 }
