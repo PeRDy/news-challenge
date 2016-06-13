@@ -1,0 +1,30 @@
+<%
+var start_date = new Date(start);
+var end_date = new Date(end);
+var start_formatted = start_date.toUTCString();
+var end_formatted = end_date.toUTCString();
+%>
+
+<div class="card card-block">
+  <h4 class="card-title">Segment</h4>
+  <ul class="list-group bmd-list-group-sm list-group-flush">
+    <li class="list-group-item">
+      <div class="bmd-list-group-col">
+        <p class="list-group-item-heading">Channel</p>
+        <p class="list-group-item-text"><%= channel %></p>
+      </div>
+    </li>
+    <li class="list-group-item">
+      <div class="bmd-list-group-col">
+        <p class="list-group-item-heading">Start</p>
+        <p class="list-group-item-text"><%= start_formatted %></p>
+      </div>
+    </li>
+    <li class="list-group-item">
+      <div class="bmd-list-group-col">
+        <p class="list-group-item-heading">End</p>
+        <p class="list-group-item-text"><%= end_formatted %></p>
+      </div>
+    </li>
+  </ul>
+</div>

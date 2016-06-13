@@ -35,6 +35,7 @@ INSTALLED_APPS = (
     # System utilities
     'gunicorn',
     'django_extensions',
+    'compressor',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -112,6 +113,12 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.abspath(os.path.join(BASE_DIR, 'static'))
+STATICFILES_FINDERS = (
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+    # other finders..
+    'compressor.finders.CompressorFinder',
+)
 
 # Logging config
 LOGGING = {

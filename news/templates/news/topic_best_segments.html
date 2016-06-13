@@ -1,0 +1,56 @@
+{% extends "news/base/base.html" %}
+{% load staticfiles %}
+
+{% block header %}
+  <nav class="navbar navbar-light bg-faded">
+    <a class="navbar-brand" href="{% url "news:home" %}">News</a>
+    <ul class="nav navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link" href="{% url "news:topic_by_channel" %}">Topics By Channel</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url "news:topic_performance" %}">Topic Performance</a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" href="{% url "news:topic_best_segments" %}">Best Segments</a>
+      </li>
+    </ul>
+  </nav>
+{% endblock %}
+
+{% block content %}
+  <div id="topic-best-segments-view">
+    <div id="collection"></div>
+
+    <script type="text/template" id="composite-view-template">
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="card card-block">
+            <form class="form">
+              <fieldset class="form-group" id="topic-name-group">
+                <label for="topic-name" class="bmd-label-floating">Topic name</label>
+                <input class="form-control" type="text" id="topic-name">
+              </fieldset>
+              <fieldset class="form-group">
+                <button type="submit" class="btn btn-primary has-spinner">
+                  <span class="spinner"><i class="material-icons material-icons-spin">autorenew</i></span>
+                  Submit
+                </button>
+              </fieldset>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <div class="row hidden-xs-up" id="segments-collection"></div>
+    </script>
+
+    <script type="text/template" id="segment-template">{% include "news/items/segment.html" %}</script>
+    <script type="text/template" id="empty-template">{% include "news/items/no_items.html" %}</script>
+  </div>
+
+{% endblock %}
+
+{% block js %}
+  <script src="{% static 'js/topics_best_segments.js' %}"></script>
+{% endblock %}

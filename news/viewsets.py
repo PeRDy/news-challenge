@@ -51,8 +51,8 @@ class TopicViewSet(viewsets.ModelViewSet):
         """
         Given a day, select the topics that works better in each channel.
         """
-        if 'date' in request.GET:
-            day = datetime.datetime.strptime(request.GET['date'], '%Y-%m-%d')
+        if 'date' in request.query_params:
+            day = datetime.datetime.strptime(request.query_params['date'], '%Y-%m-%d')
         else:
             day = datetime.datetime.now()
 
@@ -99,21 +99,18 @@ class TopicViewSet(viewsets.ModelViewSet):
             # Last step, clean duplicates
             df.dropna().drop_duplicates('name', inplace=True)
 
-            # Get objects with collected ids and create a serializer to represent data
-            queryset = self.queryset.filter(id__in=set(df['id'])).select_related('segment', 'segment__channel')
+            result = [{"name": k, "topics": list(v)} for k, v in df.groupby(['channel'])['name']]
         except ValueError:
-            queryset = self.queryset.none()
+            result = []
 
-        serializer = TopicNameChannelSerializer(queryset, many=True)
-
-        return Response(serializer.data)
+        return Response(data=result)
 
     @list_route()
     def performance(self, request, *args, **kwargs):
         """
         Given a topic, calculate performance in each channel.
         """
-        topic_name = request.GET['topic']
+        topic_name = request.query_params['topic']
 
         # Get all necessary objects to perform analysis
         topics = Topic.objects.filter(name=topic_name).select_related('segment')
@@ -138,9 +135,9 @@ class TopicViewSet(viewsets.ModelViewSet):
 
             # Apply function to calculate performance
             df['audience'] = df.apply(audience_by_channel, axis=1)
-            result = df.set_index('channel').to_dict()
+            result = df.to_dict('records')
         except ValueError:
-            result = {}
+            result = []
 
         return Response(data=result)
 
@@ -158,7 +155,7 @@ class SegmentViewSet(viewsets.ModelViewSet):
         """
         Given a topic, look for segments with best audience.
         """
-        topic_name = request.GET['topic']
+        topic_name = request.query_params['topic']
 
         # Get all necessary objects to perform analysis
         topics = Topic.objects.filter(name=topic_name).select_related('segment')

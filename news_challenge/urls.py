@@ -9,5 +9,5 @@ import news.urls
 
 urlpatterns = [
     url(r'^backend/', include(admin.site.urls)),
-    url(r'^news/', include(news.urls)),
+    url(r'^news/', include(news.urls, namespace='news')),
 ]

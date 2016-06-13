@@ -1,0 +1,8 @@
+<div class="card card-block">
+  <h4 class="card-title">Channel <%= name %></h4>
+  <ul class="list-group bmd-list-group-sm">
+    <% _.each(topics, function(topic){ %>
+    <li class="list-group-item"><%= topic %></li>
+    <% }); %>
+  </ul>
+</div>
