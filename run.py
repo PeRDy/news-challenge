@@ -8,6 +8,8 @@ import shlex
 import subprocess
 import sys
 
+import time
+
 
 class Main(object):
     INPUT_COMMANDS = ('runserver', 'shell',)
@@ -93,6 +95,7 @@ class Main(object):
             input_command = self.menu()
         try:
             if input_command == 'build':
+                time.sleep(60)
                 self.run_command('django_admin', 'migrate', '--fake-initial')
                 return_code = self.run_command('django_admin', 'collectstatic', '--noinput')
             elif input_command in self.INPUT_COMMANDS:
